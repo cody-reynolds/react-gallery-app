@@ -99,4 +99,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # ignore the test.js file
-/src/components/test.js
+src/components/config.js
