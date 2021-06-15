@@ -98,5 +98,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# ignore the config.js file
-/components/test.js
+# ignore the test.js file
+src/components/test.js
