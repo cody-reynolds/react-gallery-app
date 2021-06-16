@@ -17,12 +17,16 @@ import apiKey from './config';
 import Search from './Search';
 import Nav from './Nav';
 import PhotoContainer from './PhotoContainer';
+import NotFound from './NotFound';
 
 class App extends Component {
 
-  state = {
-    photos: [],
-    loading: true
+  constructor(props){
+    super(props);
+    this.state = {
+      photos: [],
+      loading: true
+    }
   }
 
   //Triggers search for the default query string once App component mounts into the DOM.
@@ -47,8 +51,14 @@ class App extends Component {
     return (
       <div className="container">
       <Search />
-      {/* <Nav /> */}
-      <PhotoContainer data={this.state.photos}/>
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <PhotoContainer data={this.state.photos}/>}/>
+          <Route component={NotFound}/>
+        {/* <Nav /> */}
+        {/* <PhotoContainer data={this.state.photos}/> */}
+        </Switch>
+      </Router>
       </div>
     );
   }
