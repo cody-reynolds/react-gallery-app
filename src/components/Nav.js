@@ -2,22 +2,16 @@ import React from 'react';
 import {Route, NavLink, Redirect} from 'react-router-dom';
 import PhotoContainer from './PhotoContainer';
 
-const Nav = ({match}) => {
+const Nav = (props) => {
     return(
         <nav class="main-nav">
         <ul>
-          <li><NavLink to={`${match.url}/sunsets`}>Sunsets</NavLink></li>
-          <li><NavLink to={`${match.url}/waterfalls`}>Waterfalls</NavLink></li>
-          <li><NavLink to={`${match.url}/beaches`}>Beaches</NavLink></li>
+          <li><NavLink to='/dogs'>Dogs</NavLink></li>
+          <li><NavLink to='/cats'>Cats</NavLink></li>
+          <li><NavLink to='/birds'>Birds</NavLink></li>
         </ul>
-
-        <Route exact path={match.path} render={ () => <Redirect to={`${match.path}/sunsets`} />} />
-        <Route path={`${match.path}/sunsets`} render={() => <PhotoContainer data={'sunsets'} />}/>
-        <Route path={`${match.path}/waterfalls`} render={() => <PhotoContainer data={'waterfalls'} />}/>
-        <Route path={`${match.path}/beaches`} render={() => <PhotoContainer data={'beaches'} />}/>
-
       </nav>
     )
 }
 
-export default Nav;
+export default Nav; 
