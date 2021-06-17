@@ -23,9 +23,7 @@ class App extends Component {
 
   updateSearchTerm = (query) => {
     console.log(query);
-    this.setState({
-      searchTerm: query
-    })
+    this.setState({searchTerm: query})
   }
 
   render() {
