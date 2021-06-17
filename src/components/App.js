@@ -25,17 +25,18 @@ class App extends Component {
     super(props);
     this.state = {
       photos: [],
-      loading: true
+      loading: true,
     }
+    this.getPhotos = this.getPhotos.bind(this);
   }
 
   //Triggers search for the default query string once App component mounts into the DOM.
   componentDidMount() {
-    this.performSearch();
+    this.getPhotos();
   }
 
   //Handles search function, with 'sunset' as the default query.
-  performSearch = (query = 'sunsets') => {
+  getPhotos = (query = 'sunsets') => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => 
       this.setState({
@@ -50,15 +51,8 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-      <Search />
-      <Router>
-        <Switch>
-          <Route exact path="/" render={() => <PhotoContainer data={this.state.photos}/>}/>
-          <Route component={NotFound}/>
-        {/* <Nav /> */}
-        {/* <PhotoContainer data={this.state.photos}/> */}
-        </Switch>
-      </Router>
+      <Search getPhotos={this.getPhotos}/>
+        <PhotoContainer data={this.state.photos}/>
       </div>
     );
   }
