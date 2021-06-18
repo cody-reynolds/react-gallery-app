@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from 'react-router-dom';
 
 //Imports axios to perform the API call
@@ -16,6 +17,7 @@ import apiKey from './config';
 import Search from './Search';
 import Nav from './Nav';
 import PhotoContainer from './PhotoContainer';
+import NotFound from './NotFound';
 
 class App extends Component {
 
@@ -23,11 +25,9 @@ class App extends Component {
     super();
     this.state = {
       photos: [],
-      searchTerm: '',
       loading: true
     }
     this.getPhotos = this.getPhotos.bind(this);
-    this.updateSearchTerm = this.updateSearchTerm.bind(this);
   }
 
   getPhotos = (query = 'dogs') => {
@@ -42,28 +42,17 @@ class App extends Component {
       })
   }
 
-  updateSearchTerm = (query) => {
-    console.log(query);
-    this.setState({searchTerm: query})
-  }
-
-    //Triggers search for the default query string once App component mounts into the DOM.
-  componentDidMount() {
-    this.getPhotos();
-  }
-
   render() {
     return (
       <Router>
         <div className="container">
           <Search getPhotos={this.getPhotos}/>
-          <Nav />
+          <Nav/>
           <Switch>
-            <Route path='/dogs' render={() => <PhotoContainer searchTerm={'dogs'} />}></Route>
-            <Route path='/cats' render={() => <PhotoContainer searchTerm={'cats'} />}></Route>
-            <Route path='/birds' render={() => <PhotoContainer searchTerm={'birds'} />}></Route>
+            <Route exact path='/' render={ () => <Redirect to='/dogs'/>}/>            
+            <Route exact path="/:query" render={() => <PhotoContainer photos={this.state.photos} getPhotos={this.getPhotos}/>}/>
+            <Route component={NotFound} />
           </Switch>
-          <PhotoContainer photos={this.state.photos}/>
         </div>
       </Router>
     );

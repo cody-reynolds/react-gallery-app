@@ -11,7 +11,8 @@ class Search extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.getPhotos(this.textInput.current.value);
+        let query = this.textInput.current.value;
+        this.props.getPhotos(query);
     }
 
     render() {
