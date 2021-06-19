@@ -77,14 +77,14 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <Search getPhotos={this.getCustomPhotos} history={this.props.history}/>
+          <Search getPhotos={this.getCustomPhotos}/>
           <Nav/>
           <Switch>
             <Route exact path='/' render={() => <PhotoContainer photos={this.state.dogPhotos}/>}/>
             <Route exact path='/dogs' render={() => <PhotoContainer photos={this.state.dogPhotos}/>}/>
             <Route exact path='/cats' render={() => <PhotoContainer photos={this.state.catPhotos}/>}/>
             <Route exact path='/birds' render={() => <PhotoContainer photos={this.state.birdPhotos}/>}/>
-            <Route exact path='/search/:query' render={() => <PhotoContainer photos={this.state.customPhotos}/>}/>
+            <Route path='/search/:query' render={() => <PhotoContainer photos={this.state.customPhotos}/>}/>
             <Route component={NotFound}/>
           </Switch>
         </div>
