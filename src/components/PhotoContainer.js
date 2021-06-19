@@ -1,7 +1,6 @@
 import React from 'react';
 import Photo from './Photo';
 
-
 const PhotoContainer = (props) => {
 
         let photos;

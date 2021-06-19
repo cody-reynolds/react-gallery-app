@@ -12,8 +12,10 @@ class Search extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let query = this.textInput.current.value;
+        let path = `/search/${query}`;
         this.props.getPhotos(query);
-    }
+        this.props.history.push(path);
+        }
 
     render() {
         return(
